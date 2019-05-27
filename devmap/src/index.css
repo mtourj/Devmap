@@ -1,0 +1,18 @@
+/* Global stlying goes here */
+
+h2 {
+  font-size: 24px;
+}
+
+.emptyContainerWarning {
+  margin: auto;
+  color: lemonchiffon;
+  font-style: italic;
+  text-align: center;
+  cursor: default;
+  user-select: none;
+}
+
+body {
+  margin: 0;
+}
