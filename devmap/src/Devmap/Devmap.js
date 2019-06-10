@@ -6,9 +6,9 @@ import "./Devmap.css";
 export default class Devmap extends Component {
   state = {
     modules: [
-      { title: "Module 1" },
-      { title: "Module 2" },
-      { title: "Module 3" }
+      { title: "View Module" },
+      { title: "Control Module" },
+      { title: "Data Module" }
     ]
   };
 
@@ -18,6 +18,10 @@ export default class Devmap extends Component {
     this.setState({ modules: modules });
   };
 
+  getState = () => {
+    return this.state;
+  }
+
   render() {
     const modules =
       this.state.modules.length > 0 ? (
@@ -26,6 +30,7 @@ export default class Devmap extends Component {
             delete={this.deleteModule}
             title={module.title}
             key={module.title}
+            getParentState={this.getState}
           />
         ))
       ) : (

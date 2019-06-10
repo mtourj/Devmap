@@ -15,25 +15,6 @@
   cursor: move;
 }
 
-.component .title {
-  display: flex;
-  flex-direction: row;
-  margin: 0 8px;
-  padding-bottom: 10px;
-  justify-content: space-between;
-  
-  cursor: text;
-}
-
-.component .title.notEditing {
-  transition: background 0.2s;
-  user-select: none;
-}
-
-.component .title.notEditing:hover {
-  background: rgba(255, 255, 255, 0.15);
-}
-
 .component .properties {
   min-height: 40px;
   display: flex;
@@ -43,32 +24,22 @@
 }
 
 .component .methods {
+  min-height: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border-top: 1px solid crimson;
 }
 
-.title .titleText {
+.title {
   display: flex;
-  flex-grow: 500;
-  margin: 5px 0px;
-  padding: 5px 10px;
-  align-items: center;
-  border-bottom: 1px solid white;
-  border-radius: 4px;
+  flex-direction: row;
+  margin: 0 8px;
+  padding-bottom: 10px;
+  justify-content: space-between;
+  cursor: text;
 }
 
-.title input {
-  background: rgba(255, 255, 255, 0.3);
-  border: none;
-  color: white;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: bold;
-  font-size: 24px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  outline: none;
-}
 
 .title button {
   color: white;
@@ -80,19 +51,15 @@
   cursor: pointer;
 }
 
-.title .add, .title .submit {
+.title .add {
   background: rgba(120, 220, 120, 0.75);
 }
 
-.title .submit {
-  width: 80px;
-}
-
-.title .submit:hover, .title .add:hover {
+.title .add:hover {
   background: rgba(120, 220, 120, 1);
 }
 
-.title .submit:focus, .title .add:focus {
+.title .add:focus {
   background: rgba(40, 120, 40, 1);
 }
 

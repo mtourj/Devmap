@@ -1,0 +1,73 @@
+.field {
+  display: flex;
+  flex-direction: row;
+  margin: 0 8px;
+  padding-bottom: 10px;
+  flex-grow: 500;
+  cursor: text;
+  justify-content: flex-end;
+}
+
+.field.notEditing {
+  transition: background 0.2s;
+  user-select: none;
+}
+
+.field.notEditing:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.field.notEditing .fieldText {
+  flex-grow: 500;
+}
+
+
+.field .fieldText {
+  display: flex;
+  
+  margin: 5px 0px;
+  padding: 5px 10px;
+  align-items: center;
+  border-bottom: 1px solid white;
+  border-radius: 4px;
+}
+
+.field input {
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  color: white;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: bold;
+  font-size: 24px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  outline: none;
+}
+
+.field .button {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  height: 51px;
+}
+
+.field .button .submit {
+  color: white;
+  border: none;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  background: rgba(120, 220, 120, 0.75);
+  text-align: center;
+  border-radius: 50%;
+}
+
+.field .button .submit:hover{
+  background: rgba(120, 220, 120, 1);
+}
+
+.field .button .submit:focus{
+  background: rgba(40, 120, 40, 1);
+}

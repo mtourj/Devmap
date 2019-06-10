@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import DevmapComponent from '../DevmapComponent/DevmapComponent';
-import './DevmapModule.css';
+import DevmapComponent from "../DevmapComponent/DevmapComponent";
+import DynamicField from "../DynamicField/DynamicField";
+import "./DevmapModule.css";
 
 export default class DevmapModule extends Component {
   state = {
+    title: this.props.title,
     components: [{ title: "Component 1" }, { title: "Component 2" }]
   };
 
@@ -13,6 +15,19 @@ export default class DevmapModule extends Component {
     this.setState({ components: components });
   };
 
+  updateTitle = newTitle => {
+    this.setState({ title: newTitle });
+  };
+
+  // This just makes sure there are no other modules with the same name
+  validateTitle = title => {
+    return this.props.getParentState().modules.every (module => module.title !== title);
+  }
+
+  getState = () => {
+    return this.state;
+  }
+
   render() {
     const components =
       this.state.components.length > 0 ? (
@@ -21,12 +36,24 @@ export default class DevmapModule extends Component {
             delete={this.deleteComponent}
             title={component.title}
             key={component.title}
+            getParentState={this.getState}
           />
         ))
       ) : (
         <p className="emptyContainerWarning">This module has no components</p>
       );
 
-    return <div className="module">{components}</div>;
+    return (
+      <div className="module">
+        <DynamicField
+          updateValue={this.updateTitle}
+          value={this.state.title}
+          placeholder="TITLE"
+          className="titleText"
+          validate={this.validateTitle}
+        />
+        {components}
+      </div>
+    );
   }
 }

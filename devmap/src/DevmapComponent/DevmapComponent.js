@@ -1,50 +1,36 @@
 import React, { Component } from "react";
 import DevmapProperty from "../DevmapProperty/DevmapProperty";
 import DevmapMethod from "../DevmapMethod/DevmapMethod";
+import DynamicField from "../DynamicField/DynamicField";
 import "./DevmapComponent.css";
 
 export default class DevmapComponent extends Component {
   state = {
-    isEditing: false,
     title: this.props.title,
-    tempTitle: this.props.title,
     properties: [
       { name: "property1", type: "string" },
       { name: "property2", type: "int" },
       { name: "property3", type: "{}" }
+    ],
+    methods: [
+      { name: "method1", returns: "int" },
+      { name: "method2", returns: "string" },
+      { name: "method3", returns: "[]" }
     ]
   };
 
-  toggleEditTitle = async (toggle = true) => {
-    // Only do this if we are about to switch to !isEditing to isEditing
-    if (!this.state.isEditing && toggle) {
-      await this.setState({ tempTitle: this.state.title });
-    }
-
-    await this.setState({ isEditing: toggle });
-
-    // Only focus on the input if the input exists
-    if (this.state.isEditing) {
-      this.titleInput.focus();
-    }
+  updateTitle = newTitle => {
+    this.setState({ title: newTitle });
   };
 
-  updateTitle = event => {
-    event.preventDefault();
-    // Validate title input. If empty, just skip
-    if (this.state.tempTitle !== "")
-      this.setState({ title: this.state.tempTitle });
-    this.toggleEditTitle(false);
-  };
-
-  updateTempTitle = event => {
-    this.setState({ tempTitle: event.target.value });
-  };
+  validateTitle = title => {
+    return this.props.getParentState().components.every (component => component.title !== title);
+  }
 
   deleteComponent = event => {
     event.preventDefault();
     event.stopPropagation();
-    
+
     this.props.delete();
   };
 
@@ -64,39 +50,13 @@ export default class DevmapComponent extends Component {
     this.setState({ properties: properties });
   };
 
+  deleteMethod = index => {
+    const methods = [...this.state.methods];
+    methods.splice(index, 1);
+    this.setState({ methods: methods });
+  };
+
   render() {
-    let titleSection = this.state.isEditing ? (
-      <form
-        onSubmit={this.updateTitle}
-        onClick={this.toggleEditTitle}
-        className="title"
-      >
-        <input
-          ref={input => {
-            this.titleInput = input;
-          }}
-          className="titleText"
-          placeholder="TITLE"
-          onChange={this.updateTempTitle}
-          value={this.state.tempTitle}
-          onBlur={this.toggleEditTitle.bind(this, false)}
-        />
-        <button type="submit" className="submit">
-          &#10003;
-        </button>
-      </form>
-    ) : (
-      <div onClick={this.toggleEditTitle} className="title notEditing">
-        <h2 className="titleText">{this.state.title}</h2>
-        <button onClick={this.addItem} className="far add">
-          +
-        </button>
-        <button
-          onClick={this.deleteComponent}
-          className="far fa-trash-alt delete"
-        />
-      </div>
-    );
 
     let properties =
       this.state.properties.length > 0 ? (
@@ -114,16 +74,40 @@ export default class DevmapComponent extends Component {
         </p>
       );
 
+    let methods =
+      this.state.methods.length > 0 ? (
+        this.state.methods.map((method, index) => (
+          <DevmapMethod
+            name={method.name}
+            returns={method.returns}
+            key={method.name}
+            deleteMethod={() => this.deleteMethod(index)}
+          />
+        ))
+      ) : (
+        <p className="emptyContainerWarning">This component has no methods.</p>
+      );
+
     return (
       <div className="component">
-        {titleSection}
-
-        <div className="properties">{properties}</div>
-        <div className="methods">
-          <DevmapMethod name="method1" returns="int" />
-          <DevmapMethod name="method2" returns="string" />
-          <DevmapMethod name="method3" returns="[{}]" />
+        <div className="title">
+          <DynamicField
+            updateValue={this.updateTitle}
+            placeholder="TITLE"
+            value={this.state.title}
+            className="titleText"
+            validate={this.validateTitle}
+          />
+          <button onClick={this.addItem} className="far add">
+            +
+          </button>
+          <button
+            onClick={this.deleteComponent}
+            className="far fa-trash-alt delete"
+          />
         </div>
+        <div className="properties">{properties}</div>
+        <div className="methods">{methods}</div>
       </div>
     );
   }

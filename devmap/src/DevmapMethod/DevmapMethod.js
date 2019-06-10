@@ -6,7 +6,7 @@ const DevmapMethod = props => {
     <div className="method">
       <p>{props.name}</p>
       <p className="returns">&rarr; {props.returns}</p>
-      <button className='delete'>X</button>
+      <button onClick={props.deleteMethod} className='delete'>X</button>
     </div>
   );
 };
