@@ -49,6 +49,7 @@
   align-self: center;
   margin: 3px;
   cursor: pointer;
+  border-radius: 25%;
 }
 
 .title .add {

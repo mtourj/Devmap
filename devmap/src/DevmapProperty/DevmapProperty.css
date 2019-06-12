@@ -36,8 +36,9 @@
   height: 32px;
   align-self: center;
   cursor: pointer;
+  border-radius: 25%;
 
-  transition: width 0.2s;
+  transition: background 0.2s;
 }
 
 .property:hover .delete {

@@ -1,0 +1,4 @@
+v0.1 BETA
+
+- Updated some button styles to be rounded for continuity
+- Property and method components re-written as one components

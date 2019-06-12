@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import DevmapProperty from "../DevmapProperty/DevmapProperty";
-import DevmapMethod from "../DevmapMethod/DevmapMethod";
 import DynamicField from "../DynamicField/DynamicField";
 import "./DevmapComponent.css";
 
@@ -77,7 +76,8 @@ export default class DevmapComponent extends Component {
     let methods =
       this.state.methods.length > 0 ? (
         this.state.methods.map((method, index) => (
-          <DevmapMethod
+          <DevmapProperty
+            method
             name={method.name}
             returns={method.returns}
             key={method.name}
