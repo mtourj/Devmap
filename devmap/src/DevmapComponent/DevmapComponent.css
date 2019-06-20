@@ -1,7 +1,7 @@
 .component {
   border: 1px solid gray;
   min-width: 208px;
-  width: 90%;
+  width: 100%;
   font-family: 'Segoe UI', sans-serif;
   display: flex;
   flex-direction: column;
@@ -54,6 +54,7 @@
 
 .title .add {
   background: rgba(120, 220, 120, 0.75);
+  transform: translateY(-6px);
 }
 
 .title .add:hover {
@@ -66,6 +67,7 @@
 
 .title .delete {
   background: rgba(255, 80, 100, 0.75);
+  transform: translateY(-6px);
 }
 
 .title .delete:hover {

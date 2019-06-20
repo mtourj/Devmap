@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import DevmapModule from "../DevmapModule/DevmapModule";
-import bgImage from '../img/devmapLogoLarge.png';
+import bgImage from "../img/devmapLogoLarge.png";
 import "./Devmap.css";
+
+import Sidebar from "../Sidebar/Sidebar";
 
 export default class Devmap extends Component {
   state = {
@@ -20,7 +22,7 @@ export default class Devmap extends Component {
 
   getState = () => {
     return this.state;
-  }
+  };
 
   render() {
     const modules =
@@ -37,9 +39,12 @@ export default class Devmap extends Component {
         <p className="emptyContainerWarning">This map has no modules</p>
       );
 
-    return <div className="map">
-      {modules}
-      <img src={bgImage} className='bg-img' alt='' />
-    </div>;
+    return (<div className="cols">
+      <Sidebar maps={this.props.maps} />
+      <div className="map">
+        {modules}
+        <img src={bgImage} className="bg-img" alt="" />
+      </div>
+    </div>);
   }
 }

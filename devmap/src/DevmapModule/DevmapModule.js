@@ -46,6 +46,7 @@ export default class DevmapModule extends Component {
     return (
       <div className="module">
         <DynamicField
+          centered
           updateValue={this.updateTitle}
           value={this.state.title}
           placeholder="TITLE"

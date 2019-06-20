@@ -6,7 +6,7 @@ export default class Sidebar extends React.Component {
 
     let maps = this.props.maps.map (map => {
       return (
-        <div className='map-item'>
+        <div key={map.id} className='map-item'>
           <h2>{map.name}</h2>
           <p>by {map.author}</p>
         </div>

@@ -2,6 +2,8 @@ import React from "react";
 import Field from "./Field";
 import "./Form.scss";
 
+import uniqid from 'uniqid';
+
 const Form = props => {
   /**
    * SAMPLE DATA
@@ -14,7 +16,7 @@ const Form = props => {
    */
 
   const fields = props.data.map(element => {
-    return <Field label={element.label} change={element.change} />;
+    return <Field label={element.label} change={element.change} key={uniqid()} />;
   });
 
   return (

@@ -4,6 +4,7 @@
   height: 100%;
   min-height: 300px;
   margin: 15px;
+  padding: 0.8rem 1.2rem;
   background: lightseagreen;
   display: flex;
   flex-direction: column;

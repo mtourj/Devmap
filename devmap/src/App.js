@@ -1,26 +1,27 @@
-import React, { Component } from "react";
+import React from "react";
 import "./App.css";
-import Landing from "./Landing/Landing";
 import Devmap from "./Devmap/Devmap";
 import Navbar from "./Navbar/Navbar";
-import Sidebar from './Sidebar/Sidebar';
 
-export default class App extends Component {
-  state = {
-    username: "devmap",
-    maps: [
-      {
-        name: "devmap1",
-        author: "devmaps"
-      },
-      {
-        name: "devmap2",
-        author: "mohammadtourj"
-      }
-    ]
+import withAuth from "./withAuth/WithAuth";
+import Landing from './Landing/Landing';
+
+import { connect } from "react-redux";
+
+import { Route } from "react-router-dom";
+
+import * as actions from "./actions";
+
+const mapStateToProps = state => {
+  return {
+    token: state.token,
+    maps: state.maps,
+    currentMap: state.currentMap
   };
+};
 
-  login = (user, pass) => {
+const App = props => {
+  const login = (user, pass) => {
     // Perform authentication
 
     // TODO
@@ -28,28 +29,20 @@ export default class App extends Component {
     // FOR NOW, WE JUST CHECK TO SEE IF THEY MATCH 'devmap'
     if (user === "devmap" && pass === "devmap") {
       console.log("success");
-      this.setState({ username: "devmap" });
+      // setState({ username: "devmap" });
+      props.login(user, pass);
     }
   };
 
-  render() {
-    return (
+  const app = (
       <div className="App">
-        {/* TODO: Make landing page/map conditionally appear based on sign-in status */}
-        {/* <Landing /> */}
-        {this.state.username ? (
-          <div>
-            <div className="rows">
-              <Navbar />
-              <div className="cols">
-                <Sidebar  maps={this.state.maps} />
-                <Devmap />
-              </div>
-            </div>
+        <div>
+          <div className="rows">
+            <Navbar />
+            <Route exact path='/' component={Landing} />
+            <Route path='/maps' render={routeProps => withAuth({...props, login: login})(<Devmap {...routeProps} maps={props.maps} />)} />
           </div>
-        ) : (
-          <Landing login={this.login} />
-        )}
+        </div>
         <link
           rel="stylesheet"
           href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
@@ -57,6 +50,13 @@ export default class App extends Component {
           crossOrigin="anonymous"
         />
       </div>
-    );
-  }
-}
+  );
+
+  return app;
+  // return withAuth({ ...props, login: login })(app);
+};
+
+export default connect(
+  mapStateToProps,
+  { login: actions.login }
+)(App);

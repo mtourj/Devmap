@@ -57,7 +57,7 @@ export default class DynamicField extends Component {
           ref={input => {
             this.valueInput = input;
           }}
-          className="fieldText"
+          className={`fieldText ${this.props.centered ? 'centered' : ''}`}
           placeholder={this.props.placeholder}
           onChange={this.updateTempValue}
           value={this.state.tempValue}
@@ -71,7 +71,7 @@ export default class DynamicField extends Component {
       </form>
     ) : (
       <div onClick={this.toggleEditValue} className="field notEditing">
-        <h2 className="fieldText">{this.state.value}</h2>
+        <h2 className={`fieldText ${this.props.centered ? 'centered' : ''}`}>{this.state.value}</h2>
       </div>
     );
 
