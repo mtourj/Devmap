@@ -5,34 +5,46 @@ import "./Devmap.css";
 
 import Sidebar from "../Sidebar/Sidebar";
 
-export default class Devmap extends Component {
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => ({
+  modules: state.modules
+});
+
+export default connect(mapStateToProps, { })(class Devmap extends Component {
   state = {
-    modules: [
-      { title: "View Module" },
-      { title: "Control Module" },
-      { title: "Data Module" }
-    ]
-  };
+    currentMap: null
+  }
 
   deleteModule = index => {
-    const modules = [...this.state.modules];
+    const modules = [...this.props.modules];
     modules.splice(index, 1);
-    this.setState({ modules: modules });
+    // TODO: DELETE THE MODULE FROM DATA
   };
 
-  getState = () => {
-    return this.state;
+  getProps = () => {
+    return this.props;
   };
+
+  setCurrentMap = id => {
+    const targetMap = this.props.maps.filter(map => map.id === id);
+    this.setState({ currentMap: targetMap[0]});
+  }
 
   render() {
+    console.log(this.props)
+
     const modules =
-      this.state.modules.length > 0 ? (
-        this.state.modules.map(module => (
+      this.state.currentMap &&
+      this.state.currentMap.modules.length > 0 ? (
+        this.state.currentMap.modules.map(module => (
           <DevmapModule
+            mapId={this.state.currentMap.id}
+            components={module.components}
             delete={this.deleteModule}
             title={module.title}
             key={module.title}
-            getParentState={this.getState}
+            getParentProps={this.getProps}
           />
         ))
       ) : (
@@ -40,11 +52,13 @@ export default class Devmap extends Component {
       );
 
     return (<div className="cols">
-      <Sidebar maps={this.props.maps} />
+      <Sidebar maps={this.props.maps} setCurrentMap={this.setCurrentMap} />
       <div className="map">
-        {modules}
+        {
+          this.state.currentMap ? modules : <p className='noselection'>Devmaps will appear here when selected</p>
+        }
         <img src={bgImage} className="bg-img" alt="" />
       </div>
     </div>);
   }
-}
+})

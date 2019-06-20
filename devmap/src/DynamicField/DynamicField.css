@@ -7,6 +7,8 @@
   cursor: text;
   justify-content: flex-end;
   width: 100%;
+
+  transition: border 0.3s;
 }
 
 .field.notEditing {
@@ -22,9 +24,29 @@
   flex-grow: 500;
 }
 
+.field .fieldText {
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.field .fieldText.invalid {
+  border: 1px solid crimson;
+}
+
 .field .fieldText.centered {
   justify-content: center;
   text-align: center;
+}
+
+.invalid-input {
+  position: absolute;
+  background: crimson;
+  color: white;
+  padding: 7px;
+  border: 1px solid white;
+  box-shadow: 0 0 2px 0 black;
+  border-radius: 6px;
+  transform: translateY(-56px) translateX(-80px);
+  z-index: 1;
 }
 
 .field .fieldText {

@@ -237,7 +237,7 @@ const initialState = {
               ]
             },
             {
-              title: "Component1",
+              title: "Component2",
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
@@ -255,7 +255,7 @@ const initialState = {
           title: "Data Module",
           components: [
             {
-              title: "Component1",
+              title: "Component3",
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
@@ -268,7 +268,7 @@ const initialState = {
               ]
             },
             {
-              title: "Component1",
+              title: "Component4",
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
@@ -286,7 +286,7 @@ const initialState = {
           title: "Control Module",
           components: [
             {
-              title: "Component1",
+              title: "Component5",
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
@@ -299,7 +299,7 @@ const initialState = {
               ]
             },
             {
-              title: "Component1",
+              title: "Component6",
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
@@ -317,11 +317,11 @@ const initialState = {
     },
     {
       id: uniqid(),
-      name: "devmap1",
-      author: "devmaps",
+      name: "devmap2",
+      author: "mohammadtourj",
       modules: [
         {
-          title: "View Module",
+          title: "View Module 2",
           components: [
             {
               title: "Component1",
@@ -337,7 +337,7 @@ const initialState = {
               ]
             },
             {
-              title: "Component1",
+              title: "Component2",
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
@@ -355,7 +355,7 @@ const initialState = {
           title: "Data Module",
           components: [
             {
-              title: "Component1",
+              title: "Component3",
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
@@ -368,7 +368,7 @@ const initialState = {
               ]
             },
             {
-              title: "Component1",
+              title: "Component4",
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
@@ -386,7 +386,7 @@ const initialState = {
           title: "Control Module",
           components: [
             {
-              title: "Component1",
+              title: "Component5",
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
@@ -399,7 +399,7 @@ const initialState = {
               ]
             },
             {
-              title: "Component1",
+              title: "Component6",
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
@@ -428,6 +428,9 @@ const reducer = (state = initialState, action) => {
         ...state,
         token: action.payload.username
       }
+    case actions.RENAME_COMPONENT:
+      console.log('renaming ' + action.payload.componentName + ' to ' + action.payload.newName);
+      
     default:
       return state;
   }

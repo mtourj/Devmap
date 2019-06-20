@@ -3,27 +3,25 @@ import DevmapProperty from "../DevmapProperty/DevmapProperty";
 import DynamicField from "../DynamicField/DynamicField";
 import "./DevmapComponent.css";
 
-export default class DevmapComponent extends Component {
-  state = {
-    title: this.props.title,
-    properties: [
-      { name: "property1", type: "string" },
-      { name: "property2", type: "int" },
-      { name: "property3", type: "{}" }
-    ],
-    methods: [
-      { name: "method1", returns: "int" },
-      { name: "method2", returns: "string" },
-      { name: "method3", returns: "[]" }
-    ]
-  };
+import { renameComponent } from '../actions';
+
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => ({
+  maps: state.maps
+});
+export default connect (mapStateToProps, { renameComponent }) (class DevmapComponent extends Component {
 
   updateTitle = newTitle => {
-    this.setState({ title: newTitle });
+    // this.setState({ title: newTitle });
+    this.props.renameComponent(this.props.mapId, this.props.title, newTitle);
   };
 
   validateTitle = title => {
-    return this.props.getParentState().components.every (component => component.title !== title);
+    const targetMap = this.props.maps.filter(map => map.id === this.props.mapId)[0];
+    const components = [];
+    targetMap.modules.forEach(module => components.push(...module.components));
+    return components.every(component => component.title !== title)
   }
 
   deleteComponent = event => {
@@ -58,8 +56,8 @@ export default class DevmapComponent extends Component {
   render() {
 
     let properties =
-      this.state.properties.length > 0 ? (
-        this.state.properties.map((prop, index) => (
+      this.props.properties.length > 0 ? (
+        this.props.properties.map((prop, index) => (
           <DevmapProperty
             name={prop.name}
             type={prop.type}
@@ -74,8 +72,8 @@ export default class DevmapComponent extends Component {
       );
 
     let methods =
-      this.state.methods.length > 0 ? (
-        this.state.methods.map((method, index) => (
+      this.props.methods.length > 0 ? (
+        this.props.methods.map((method, index) => (
           <DevmapProperty
             method
             name={method.name}
@@ -94,7 +92,7 @@ export default class DevmapComponent extends Component {
           <DynamicField
             updateValue={this.updateTitle}
             placeholder="TITLE"
-            value={this.state.title}
+            value={this.props.title}
             className="titleText"
             validate={this.validateTitle}
           />
@@ -111,4 +109,4 @@ export default class DevmapComponent extends Component {
       </div>
     );
   }
-}
+})

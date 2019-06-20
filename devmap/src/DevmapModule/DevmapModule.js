@@ -21,7 +21,7 @@ export default class DevmapModule extends Component {
 
   // This just makes sure there are no other modules with the same name
   validateTitle = title => {
-    return this.props.getParentState().modules.every (module => module.title !== title);
+    return this.props.getParentProps().modules.every (module => module.title !== title);
   }
 
   getState = () => {
@@ -30,13 +30,16 @@ export default class DevmapModule extends Component {
 
   render() {
     const components =
-      this.state.components.length > 0 ? (
-        this.state.components.map(component => (
+      this.props.components.length > 0 ? (
+        this.props.components.map(component => (
           <DevmapComponent
+            mapId={this.props.mapId}
+            methods={component.methods}
+            properties={component.properties}
             delete={this.deleteComponent}
             title={component.title}
             key={component.title}
-            getParentState={this.getState}
+            getParentProps={this.getState}
           />
         ))
       ) : (

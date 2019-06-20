@@ -19,3 +19,15 @@
   max-width: 800px;
   z-index: 0;
 }
+
+.noselection {
+  background: gray;
+  padding: 2rem;
+  user-select: none;
+  border-radius: 7px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  font-style: italic;
+  box-shadow: 0 0 5px 0 black;
+  z-index: 1;
+}

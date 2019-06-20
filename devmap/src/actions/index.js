@@ -1,12 +1,17 @@
 export const CREATE_MAP = 'CREATE_MAP';
+export const RENAME_MAP = 'RENAME_MAP';
 export const DELETE_MAP = 'DELETE_MAP';
 export const CREATE_MODULE = 'CREATE_MODULE';
+export const RENAME_MODULE = 'RENAME_MODULE';
 export const DELETE_MODULE = 'DELETE_MODULE';
 export const CREATE_COMPONENT = 'CREATE_COMPONENT';
+export const RENAME_COMPONENT = 'RENAME_COMPONENT';
 export const DELETE_COMPONENT = 'DELETE_COMPONENT';
 export const CREATE_METHOD = 'CREATE_METHOD';
+export const RENAME_METHOD = 'RENAME_METHOD';
 export const DELETE_METHOD = 'DELETE_METHOD';
 export const CREATE_PROPERTY = 'CREATE_PROPERTY';
+export const RENAME_PROPERTY = 'RENAME_PROPERTY';
 export const DELETE_PROPERTY = 'DELETE_PROPERTY';
 export const LOGIN = 'LOGIN';
 
@@ -52,4 +57,17 @@ export const login = (username, password) => dispatch => {
       password
     }
   });
+}
+
+export const renameComponent = (mapId, componentName, newName) => dispatch => {
+  dispatch (
+    {
+      type: RENAME_COMPONENT,
+      payload: {
+        mapId,
+        componentName,
+        newName
+      }
+    }
+  )
 }
