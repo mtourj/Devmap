@@ -42,9 +42,13 @@ export default class DynamicField extends Component {
     // Runs through an optional validation function,
     // passed in by a parent
     // if ((this.props.validate && this.props.validate(this.state.tempValue)) || (!this.props.validate && this.state.tempValue.trim() !== "")) {
+
+    const text = /^[A-Za-z ]+$/;
+
     if (
       this.state.tempValue.trim() !== "" &&
-      !(this.props.nospace && this.state.tempValue.includes(" "))
+      !(this.props.nospace && this.state.tempValue.includes(" ")) &&
+      !(this.props.text && !text.test(this.state.tempValue))
     ) {
       if (this.props.validate && this.props.validate(this.state.tempValue)) {
         await this.setState({ value: this.state.tempValue.trim() });

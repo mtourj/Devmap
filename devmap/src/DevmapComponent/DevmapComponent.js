@@ -105,6 +105,7 @@ export default connect (mapStateToProps, { renameComponent, deleteMethod, delete
         <div className="title">
           <DynamicField
             nospace
+            text
             updateValue={this.updateTitle}
             placeholder="TITLE"
             value={this.props.component.title}
