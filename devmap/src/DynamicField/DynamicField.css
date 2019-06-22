@@ -5,7 +5,8 @@
   padding-bottom: 10px;
   flex-grow: 500;
   cursor: text;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  align-items: center;
   width: 100%;
 
   transition: border 0.3s;
@@ -37,6 +38,43 @@
   text-align: center;
 }
 
+.field .fieldText {
+  display: flex;
+  
+  margin: 5px 0px;
+  padding: 5px 10px;
+  align-items: center;
+  border-bottom: 1px solid white;
+  border-radius: 4px;
+}
+
+.field.notEditing .mini-field-text {
+  left: 0;
+}
+
+.field .mini-field-text {
+  border: 1px solid rgba(0, 0, 0, 0);
+  font-weight: normal;
+}
+
+.field .mini-field-text.invalid {
+  border: 1px solid crimson;
+}
+
+.field .mini-field-text.centered {
+  justify-content: center;
+  text-align: center;
+}
+
+.field .mini-field-text {
+  display: flex;
+  margin: 0;
+  padding: 0 8px;
+  align-items: center;
+  border-bottom: none;
+  border-radius: 4px;
+}
+
 .invalid-input {
   position: absolute;
   background: crimson;
@@ -47,16 +85,6 @@
   border-radius: 6px;
   transform: translateY(-56px) translateX(-80px);
   z-index: 1;
-}
-
-.field .fieldText {
-  display: flex;
-  
-  margin: 5px 0px;
-  padding: 5px 10px;
-  align-items: center;
-  border-bottom: 1px solid white;
-  border-radius: 4px;
 }
 
 
