@@ -23,7 +23,7 @@ export default connect (mapStateToProps, { renameComponent, deleteMethod, delete
     const components = [];
     const map = this.props.maps.find(map => map.id === this.props.currentMap);
     map.modules.forEach(module => components.push(...module.components));
-    return components.every(component => component.title !== title)
+    return components.every(component => !(component.title === title && component.title !== this.props.component.title ))
   }
 
   deleteComponent = event => {
