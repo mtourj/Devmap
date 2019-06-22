@@ -67,7 +67,7 @@ export default connect(mapStateToProps, { deleteComponent, renameModule }) (clas
           updateValue={this.updateTitle}
           value={this.props.title}
           placeholder="TITLE"
-          className="titleText"
+          className="fieldText"
           validate={this.validateTitle}
         />
         {components}

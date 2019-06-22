@@ -109,7 +109,7 @@ export default connect (mapStateToProps, { renameComponent, deleteMethod, delete
             updateValue={this.updateTitle}
             placeholder="TITLE"
             value={this.props.component.title}
-            className="titleText"
+            className="fieldText"
             validate={this.validateTitle}
           />
           <button onClick={this.addItem} className="far add">
