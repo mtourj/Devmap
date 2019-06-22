@@ -1,37 +1,36 @@
 import React, { Component } from "react";
 import DevmapProperty from "../DevmapProperty/DevmapProperty";
-import DevmapMethod from "../DevmapMethod/DevmapMethod";
 import DynamicField from "../DynamicField/DynamicField";
 import "./DevmapComponent.css";
 
-export default class DevmapComponent extends Component {
-  state = {
-    title: this.props.title,
-    properties: [
-      { name: "property1", type: "string" },
-      { name: "property2", type: "int" },
-      { name: "property3", type: "{}" }
-    ],
-    methods: [
-      { name: "method1", returns: "int" },
-      { name: "method2", returns: "string" },
-      { name: "method3", returns: "[]" }
-    ]
-  };
+import { renameComponent, deleteMethod, deleteProperty } from '../actions';
+
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => ({
+  currentMap: state.currentMap,
+  maps: state.maps
+});
+export default connect (mapStateToProps, { renameComponent, deleteMethod, deleteProperty }) (class DevmapComponent extends Component {
+  properties = [];
+  methods = [];
 
   updateTitle = newTitle => {
-    this.setState({ title: newTitle });
+    this.props.renameComponent(this.props.moduleId, this.props.component.title, newTitle);
   };
 
   validateTitle = title => {
-    return this.props.getParentState().components.every (component => component.title !== title);
+    const components = [];
+    const map = this.props.maps.find(map => map.id === this.props.currentMap);
+    map.modules.forEach(module => components.push(...module.components));
+    return components.every(component => component.title !== title)
   }
 
   deleteComponent = event => {
     event.preventDefault();
     event.stopPropagation();
 
-    this.props.delete();
+    this.props.delete(this.props.title);
   };
 
   addItem = event => {
@@ -45,23 +44,35 @@ export default class DevmapComponent extends Component {
   };
 
   deleteProperty = index => {
-    const properties = [...this.state.properties];
+    const properties = [...this.properties];
     properties.splice(index, 1);
-    this.setState({ properties: properties });
+    this.props.deleteProperty(this.props.moduleId, this.props.component.title, {
+      title: this.props.component.title,
+      properties,
+      methods: this.methods,
+    });
   };
 
   deleteMethod = index => {
-    const methods = [...this.state.methods];
+    const methods = [...this.methods];
     methods.splice(index, 1);
-    this.setState({ methods: methods });
+    this.props.deleteMethod(this.props.moduleId, this.props.component.title, {
+      title: this.props.component.title,
+      properties: this.properties,
+      methods
+    });
   };
 
   render() {
 
+    this.properties = this.props.component.properties;
+    this.methods = this.props.component.methods;
+
     let properties =
-      this.state.properties.length > 0 ? (
-        this.state.properties.map((prop, index) => (
+      this.properties.length > 0 ? (
+        this.properties.map((prop, index) => (
           <DevmapProperty
+            index={index}
             name={prop.name}
             type={prop.type}
             deleteProperty={() => this.deleteProperty(index)}
@@ -75,9 +86,10 @@ export default class DevmapComponent extends Component {
       );
 
     let methods =
-      this.state.methods.length > 0 ? (
-        this.state.methods.map((method, index) => (
-          <DevmapMethod
+      this.methods.length > 0 ? (
+        this.methods.map((method, index) => (
+          <DevmapProperty
+            method
             name={method.name}
             returns={method.returns}
             key={method.name}
@@ -92,9 +104,10 @@ export default class DevmapComponent extends Component {
       <div className="component">
         <div className="title">
           <DynamicField
+            nospace
             updateValue={this.updateTitle}
             placeholder="TITLE"
-            value={this.state.title}
+            value={this.props.component.title}
             className="titleText"
             validate={this.validateTitle}
           />
@@ -111,4 +124,4 @@ export default class DevmapComponent extends Component {
       </div>
     );
   }
-}
+})

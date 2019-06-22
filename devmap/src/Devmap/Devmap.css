@@ -10,6 +10,8 @@
   z-index: 0;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  object-fit: cover;
 }
 
 .map .bg-img {
@@ -17,5 +19,17 @@
   
   width: 100%;
   max-width: 800px;
-  z-index: 0;
+  z-index: -1;
+}
+
+.noselection {
+  background: gray;
+  padding: 2rem;
+  user-select: none;
+  border-radius: 7px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  font-style: italic;
+  box-shadow: 0 0 5px 0 black;
+  z-index: 1;
 }

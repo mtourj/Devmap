@@ -5,10 +5,12 @@ export default class DynamicField extends Component {
   state = {
     isEditing: false,
     value: this.props.value,
-    tempValue: this.props.value
+    tempValue: this.props.value,
+    invalid: ""
   };
 
   toggleEditValue = async (toggle = true) => {
+    if (this.state.invalid) await this.setState({ invalid: "" });
     // Only do this if we are about to switch to !isEditing to isEditing
     if (!this.state.isEditing && toggle) {
       await this.setState({ tempValue: this.state.value });
@@ -18,15 +20,21 @@ export default class DynamicField extends Component {
 
     // Only focus on the input if the input exists
     if (this.state.isEditing) {
-      this.valueInput.focus();
+      try {
+        this.valueInput.focus();
+      } catch (err) {
+        console.log("Misfire!");
+      }
     }
   };
 
   updateTempValue = async event => {
+    if (this.state.invalid) this.setState({ invalid: "" });
     await this.setState({ tempValue: event.target.value });
   };
 
   updateValue = async event => {
+    event.persist();
     event.preventDefault();
 
     // Validate value input.
@@ -34,16 +42,21 @@ export default class DynamicField extends Component {
     // Runs through an optional validation function,
     // passed in by a parent
     // if ((this.props.validate && this.props.validate(this.state.tempValue)) || (!this.props.validate && this.state.tempValue.trim() !== "")) {
-    if (this.state.tempValue.trim() !== "") {
+    if (
+      this.state.tempValue.trim() !== "" &&
+      !(this.props.nospace && this.state.tempValue.includes(" "))
+    ) {
       if (this.props.validate && this.props.validate(this.state.tempValue)) {
-        console.log("valid title!");
         await this.setState({ value: this.state.tempValue.trim() });
-      }
-    }
 
-    //TODO: Handle invalid strings by giving an error like 'There is already a module with that name!'
-    this.props.updateValue(this.state.value);
-    this.toggleEditValue(false);
+        this.props.updateValue(this.state.value);
+        this.toggleEditValue(false);
+      } else {
+        await this.setState({ invalid: "The text you entered is invalid" });
+      }
+    } else {
+      await this.setState({ invalid: "The text you entered is invalid" });
+    }
   };
 
   render() {
@@ -57,12 +70,17 @@ export default class DynamicField extends Component {
           ref={input => {
             this.valueInput = input;
           }}
-          className="fieldText"
+          className={`fieldText ${this.props.centered ? "centered" : ""} ${
+            this.state.invalid ? "invalid" : ""
+          }`}
           placeholder={this.props.placeholder}
           onChange={this.updateTempValue}
           value={this.state.tempValue}
           onBlur={this.toggleEditValue.bind(this, false)}
         />
+        {this.state.invalid ? (
+          <p className="invalid-input">{this.state.invalid}</p>
+        ) : null}
         <div className="button">
           <button type="submit" className="submit">
             &#10003;
@@ -71,7 +89,9 @@ export default class DynamicField extends Component {
       </form>
     ) : (
       <div onClick={this.toggleEditValue} className="field notEditing">
-        <h2 className="fieldText">{this.state.value}</h2>
+        <h2 className={`fieldText ${this.props.centered ? "centered" : ""}`}>
+          {this.state.value}
+        </h2>
       </div>
     );
 

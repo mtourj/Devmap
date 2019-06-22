@@ -9,6 +9,10 @@
   font-weight: bold;
   font-size: 12px;  
   
+  z-index: 0;
+
+  user-select: none;
+
   .map-item {
     padding: 4px 24px;
     background: rgb(0, 100, 100);
