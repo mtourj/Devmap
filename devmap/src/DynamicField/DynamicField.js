@@ -20,7 +20,11 @@ export default class DynamicField extends Component {
 
     // Only focus on the input if the input exists
     if (this.state.isEditing) {
-      this.valueInput.focus();
+      try {
+        this.valueInput.focus();
+      } catch (err) {
+        console.log("Misfire!");
+      }
     }
   };
 
@@ -32,13 +36,16 @@ export default class DynamicField extends Component {
   updateValue = async event => {
     event.persist();
     event.preventDefault();
-    
+
     // Validate value input.
     // Checks if string is empty
     // Runs through an optional validation function,
     // passed in by a parent
     // if ((this.props.validate && this.props.validate(this.state.tempValue)) || (!this.props.validate && this.state.tempValue.trim() !== "")) {
-    if (this.state.tempValue.trim() !== "") {
+    if (
+      this.state.tempValue.trim() !== "" &&
+      !(this.props.nospace && this.state.tempValue.includes(" "))
+    ) {
       if (this.props.validate && this.props.validate(this.state.tempValue)) {
         await this.setState({ value: this.state.tempValue.trim() });
 
@@ -47,6 +54,8 @@ export default class DynamicField extends Component {
       } else {
         await this.setState({ invalid: "The text you entered is invalid" });
       }
+    } else {
+      await this.setState({ invalid: "The text you entered is invalid" });
     }
   };
 

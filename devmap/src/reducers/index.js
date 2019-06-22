@@ -1,5 +1,5 @@
-import uniqid from 'uniqid';
-import * as actions from '../actions';
+import uniqid from "uniqid";
+import * as actions from "../actions";
 
 // This is how the data should be structured:
 // const initialState = {
@@ -212,7 +212,7 @@ import * as actions from '../actions';
 // Some dummy data here....
 
 const initialState = {
-  token: localStorage.getItem('token'),
+  token: localStorage.getItem("token"),
   currentMap: "",
   maps: [
     {
@@ -221,6 +221,7 @@ const initialState = {
       author: "devmaps",
       modules: [
         {
+          id: uniqid(),
           title: "View Module",
           components: [
             {
@@ -252,6 +253,7 @@ const initialState = {
           ]
         },
         {
+          id: uniqid(),
           title: "Data Module",
           components: [
             {
@@ -283,6 +285,7 @@ const initialState = {
           ]
         },
         {
+          id: uniqid(),
           title: "Control Module",
           components: [
             {
@@ -321,6 +324,7 @@ const initialState = {
       author: "mohammadtourj",
       modules: [
         {
+          id: uniqid(),
           title: "View Module 2",
           components: [
             {
@@ -352,6 +356,7 @@ const initialState = {
           ]
         },
         {
+          id: uniqid(),
           title: "Data Module",
           components: [
             {
@@ -383,6 +388,7 @@ const initialState = {
           ]
         },
         {
+          id: uniqid(),
           title: "Control Module",
           components: [
             {
@@ -419,20 +425,121 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     // Actions go here
     case actions.LOGIN:
-      console.log('tryna login!');
-      localStorage.setItem('token', action.payload.username);
+      localStorage.setItem("token", action.payload.username);
       return {
         ...state,
         token: action.payload.username
-      }
+      };
+    case actions.RENAME_MODULE:
+      return renameModule(state, action);
     case actions.RENAME_COMPONENT:
-      console.log('renaming ' + action.payload.componentName + ' to ' + action.payload.newName);
-      
+      return renameComponent(state, action);
+    case actions.DELETE_COMPONENT:
+      return deleteComponent(state, action);
+    case actions.DELETE_PROPERTY:
+      return deleteProperty(
+        state,
+        action.payload.moduleId,
+        action.payload.componentName,
+        action.payload.newComponent
+      );
+    case actions.DELETE_METHOD:
+      return deleteMethod(
+        state,
+        action.payload.moduleId,
+        action.payload.componentName,
+        action.payload.newComponent
+      );
+    case actions.SET_CURRENT_MAP:
+      return {
+        ...state,
+        currentMap: action.payload
+      };
     default:
       return state;
+  }
+};
+
+const deleteComponent = (state, action) => {
+  // Find target map index
+  // Change the state map at index found to a new map
+  //
+  // This new map will be the original map, with the module at index of target module modified
+  // The new module will be the original module, with the components proprty changed
+
+  const maps = Array.from(state.maps);
+  const map = maps.find(map => map.id === state.currentMap);
+  const module = map.modules.find(
+    module => module.id === action.payload.moduleId
+  );
+  module.components = action.payload.newComponents;
+  return {
+    ...state,
+    maps
+  };
+};
+
+const deleteMethod = (state, moduleId, componentName, newComponent) => {
+  const maps = Array.from(state.maps);
+  const map = maps.find(map => map.id === state.currentMap);
+  const module = map.modules.find(module => module.id === moduleId);
+  const targetComponentIndex = module.components.findIndex(
+    component => component.title === componentName
+  );
+  module.components[targetComponentIndex] = newComponent;
+
+  return {
+    ...state,
+    maps
+  };
+};
+
+const deleteProperty = (state, moduleId, componentName, newComponent) => {
+  const maps = Array.from(state.maps);
+  const map = maps.find(map => map.id === state.currentMap);
+  const module = map.modules.find(module => module.id === moduleId);
+  const targetComponentIndex = module.components.findIndex(
+    component => component.title === componentName
+  );
+  module.components[targetComponentIndex] = newComponent;
+
+  return {
+    ...state,
+    maps
+  };
+};
+
+const renameComponent = (state, action) => {
+  const maps = Array.from(state.maps);
+  const map = maps.find(map => map.id === state.currentMap);
+  const module = map.modules.find(
+    module => module.id === action.payload.moduleId
+  );
+  const component = module.components.find(
+    component => component.title === action.payload.componentName
+  );
+  component.title = action.payload.newName;
+
+  return {
+    ...state,
+    maps
+  };
+};
+
+const renameModule = (state, action) => {
+  const maps = Array.from(state.maps);
+  const map = maps.find(map => map.id === state.currentMap);
+  const module = map.modules.find(
+    module => module.id === action.payload.moduleId
+  );
+  module.title = action.payload.newName;
+
+  return {
+    ...state,
+    maps
   }
 };
 

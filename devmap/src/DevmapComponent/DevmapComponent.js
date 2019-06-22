@@ -3,24 +3,26 @@ import DevmapProperty from "../DevmapProperty/DevmapProperty";
 import DynamicField from "../DynamicField/DynamicField";
 import "./DevmapComponent.css";
 
-import { renameComponent } from '../actions';
+import { renameComponent, deleteMethod, deleteProperty } from '../actions';
 
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => ({
+  currentMap: state.currentMap,
   maps: state.maps
 });
-export default connect (mapStateToProps, { renameComponent }) (class DevmapComponent extends Component {
+export default connect (mapStateToProps, { renameComponent, deleteMethod, deleteProperty }) (class DevmapComponent extends Component {
+  properties = [];
+  methods = [];
 
   updateTitle = newTitle => {
-    // this.setState({ title: newTitle });
-    this.props.renameComponent(this.props.mapId, this.props.title, newTitle);
+    this.props.renameComponent(this.props.moduleId, this.props.component.title, newTitle);
   };
 
   validateTitle = title => {
-    const targetMap = this.props.maps.filter(map => map.id === this.props.mapId)[0];
     const components = [];
-    targetMap.modules.forEach(module => components.push(...module.components));
+    const map = this.props.maps.find(map => map.id === this.props.currentMap);
+    map.modules.forEach(module => components.push(...module.components));
     return components.every(component => component.title !== title)
   }
 
@@ -28,7 +30,7 @@ export default connect (mapStateToProps, { renameComponent }) (class DevmapCompo
     event.preventDefault();
     event.stopPropagation();
 
-    this.props.delete();
+    this.props.delete(this.props.title);
   };
 
   addItem = event => {
@@ -42,23 +44,35 @@ export default connect (mapStateToProps, { renameComponent }) (class DevmapCompo
   };
 
   deleteProperty = index => {
-    const properties = [...this.state.properties];
+    const properties = [...this.properties];
     properties.splice(index, 1);
-    this.setState({ properties: properties });
+    this.props.deleteProperty(this.props.moduleId, this.props.component.title, {
+      title: this.props.component.title,
+      properties,
+      methods: this.methods,
+    });
   };
 
   deleteMethod = index => {
-    const methods = [...this.state.methods];
+    const methods = [...this.methods];
     methods.splice(index, 1);
-    this.setState({ methods: methods });
+    this.props.deleteMethod(this.props.moduleId, this.props.component.title, {
+      title: this.props.component.title,
+      properties: this.properties,
+      methods
+    });
   };
 
   render() {
 
+    this.properties = this.props.component.properties;
+    this.methods = this.props.component.methods;
+
     let properties =
-      this.props.properties.length > 0 ? (
-        this.props.properties.map((prop, index) => (
+      this.properties.length > 0 ? (
+        this.properties.map((prop, index) => (
           <DevmapProperty
+            index={index}
             name={prop.name}
             type={prop.type}
             deleteProperty={() => this.deleteProperty(index)}
@@ -72,8 +86,8 @@ export default connect (mapStateToProps, { renameComponent }) (class DevmapCompo
       );
 
     let methods =
-      this.props.methods.length > 0 ? (
-        this.props.methods.map((method, index) => (
+      this.methods.length > 0 ? (
+        this.methods.map((method, index) => (
           <DevmapProperty
             method
             name={method.name}
@@ -90,9 +104,10 @@ export default connect (mapStateToProps, { renameComponent }) (class DevmapCompo
       <div className="component">
         <div className="title">
           <DynamicField
+            nospace
             updateValue={this.updateTitle}
             placeholder="TITLE"
-            value={this.props.title}
+            value={this.props.component.title}
             className="titleText"
             validate={this.validateTitle}
           />

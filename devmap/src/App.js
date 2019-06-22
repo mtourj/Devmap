@@ -10,13 +10,12 @@ import { connect } from "react-redux";
 
 import { Route } from "react-router-dom";
 
-import * as actions from "./actions";
+import { login } from "./actions";
 
 const mapStateToProps = state => {
   return {
     token: state.token,
-    maps: state.maps,
-    currentMap: state.currentMap
+    maps: state.maps
   };
 };
 
@@ -28,8 +27,6 @@ const App = props => {
 
     // FOR NOW, WE JUST CHECK TO SEE IF THEY MATCH 'devmap'
     if (user === "devmap" && pass === "devmap") {
-      console.log("success");
-      // setState({ username: "devmap" });
       props.login(user, pass);
     }
   };
@@ -53,10 +50,9 @@ const App = props => {
   );
 
   return app;
-  // return withAuth({ ...props, login: login })(app);
 };
 
 export default connect(
   mapStateToProps,
-  { login: actions.login }
+  { login }
 )(App);

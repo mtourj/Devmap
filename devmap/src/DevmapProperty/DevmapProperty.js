@@ -12,7 +12,7 @@ const DevmapProperty = props => {
     <div className='property'>
       <p>{props.name}</p>
       {type}
-      <button onClick={isMethod ? props.deleteMethod : props.deleteProperty} className='delete'>X</button>
+      <button onClick={isMethod ? () => props.deleteMethod(props.index) : () => props.deleteProperty(props.index)} className='delete'>X</button>
     </div>
   );
 }

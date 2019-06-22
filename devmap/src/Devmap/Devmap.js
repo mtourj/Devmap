@@ -7,15 +7,16 @@ import Sidebar from "../Sidebar/Sidebar";
 
 import { connect } from 'react-redux';
 
-const mapStateToProps = state => ({
-  modules: state.modules
+import { setCurrentMap } from '../actions';
+
+const mapStateToProps = state => {
+  return ({
+  maps: state.maps,
+  currentMap: state.currentMap
 });
+}
 
-export default connect(mapStateToProps, { })(class Devmap extends Component {
-  state = {
-    currentMap: null
-  }
-
+export default connect(mapStateToProps, { setCurrentMap })(class Devmap extends Component {
   deleteModule = index => {
     const modules = [...this.props.modules];
     modules.splice(index, 1);
@@ -26,21 +27,22 @@ export default connect(mapStateToProps, { })(class Devmap extends Component {
     return this.props;
   };
 
+  getCurrentMap = () => {
+    return this.props.maps.find(map => map.id === this.props.currentMap)
+  }
+
   setCurrentMap = id => {
-    const targetMap = this.props.maps.filter(map => map.id === id);
-    this.setState({ currentMap: targetMap[0]});
+    this.props.setCurrentMap(id);
   }
 
   render() {
-    console.log(this.props)
-
     const modules =
-      this.state.currentMap &&
-      this.state.currentMap.modules.length > 0 ? (
-        this.state.currentMap.modules.map(module => (
+      this.getCurrentMap() &&
+      this.getCurrentMap().modules.length > 0 ? (
+        this.getCurrentMap().modules.map(module => (
           <DevmapModule
-            mapId={this.state.currentMap.id}
-            components={module.components}
+            mapId={this.props.currentMap}
+            id={module.id}
             delete={this.deleteModule}
             title={module.title}
             key={module.title}
@@ -55,7 +57,7 @@ export default connect(mapStateToProps, { })(class Devmap extends Component {
       <Sidebar maps={this.props.maps} setCurrentMap={this.setCurrentMap} />
       <div className="map">
         {
-          this.state.currentMap ? modules : <p className='noselection'>Devmaps will appear here when selected</p>
+          this.props.currentMap ? modules : <p className='noselection'>Devmaps will appear here when selected</p>
         }
         <img src={bgImage} className="bg-img" alt="" />
       </div>

@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 
 const Login = props => {
-  console.log(props);
 
   if(props.token) {
     props.history.push('/maps');

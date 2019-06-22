@@ -14,6 +14,7 @@ export const CREATE_PROPERTY = 'CREATE_PROPERTY';
 export const RENAME_PROPERTY = 'RENAME_PROPERTY';
 export const DELETE_PROPERTY = 'DELETE_PROPERTY';
 export const LOGIN = 'LOGIN';
+export const SET_CURRENT_MAP = 'SET_CURRENT_MAP';
 
 export const createMap = title => dispatch => {
   dispatch ( {
@@ -39,6 +40,18 @@ export const createModule = (mapId, title) => dispatch => {
   });
 }
 
+export const renameModule = (moduleId, newName) => dispatch => {
+  dispatch (
+    {
+      type: RENAME_MODULE,
+      payload: {
+        moduleId,
+        newName
+      }
+    }
+  )
+}
+
 export const deleteModule = (mapId, moduleId) => dispatch => {
   dispatch ( {
     type: DELETE_MODULE,
@@ -59,15 +72,59 @@ export const login = (username, password) => dispatch => {
   });
 }
 
-export const renameComponent = (mapId, componentName, newName) => dispatch => {
+export const renameComponent = (moduleId, componentName, newName) => dispatch => {
   dispatch (
     {
       type: RENAME_COMPONENT,
       payload: {
-        mapId,
+        moduleId,
         componentName,
         newName
       }
     }
   )
+}
+
+export const deleteComponent = (moduleId, newComponents) => dispatch => {
+  dispatch (
+    {
+      type: DELETE_COMPONENT,
+      payload: {
+        moduleId,
+        newComponents
+      }
+    }
+  )
+}
+
+export const deleteMethod = (moduleId, componentName, newComponent) => dispatch => {
+  dispatch ({
+    type: DELETE_METHOD,
+    payload: {
+      moduleId,
+      componentName,
+      newComponent
+    }
+  })
+}
+
+export const deleteProperty = (moduleId, componentName, newComponent) => dispatch => {
+  console.log('action created');
+  dispatch ({
+    type: DELETE_PROPERTY,
+    payload: {
+      moduleId,
+      componentName,
+      newComponent
+    }
+  })
+}
+
+export const setCurrentMap = map => dispatch => {
+  dispatch (
+    {
+      type: SET_CURRENT_MAP,
+      payload: map
+    }
+  );
 }
