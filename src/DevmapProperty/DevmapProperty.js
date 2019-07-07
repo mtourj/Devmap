@@ -7,8 +7,8 @@ const DevmapProperty = props => {
   // Is this a method?
   const isMethod = props.method;
 
-  const type = isMethod ? <p className='returns'>&rarr; {props.returns}</p>
-                        : <p className='type'>{props.type}</p>;
+  const type = isMethod ? <span className='returns'>{['→', props.returns].join(' ')}</span>
+                        : <span className='type'>{props.type}</span>;
 
   const updateName = newName => {
     props.rename(props.name, newName);
