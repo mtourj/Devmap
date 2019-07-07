@@ -439,15 +439,10 @@ const reducer = (state = initialState, action) => {
       return renameComponent(state, action);
     case actions.DELETE_COMPONENT:
       return deleteComponent(state, action);
+    case actions.RENAME_PROPERTY:
+      return renameProperty(state, action);
     case actions.DELETE_PROPERTY:
       return deleteProperty(
-        state,
-        action.payload.moduleId,
-        action.payload.componentName,
-        action.payload.newComponent
-      );
-    case actions.DELETE_METHOD:
-      return deleteMethod(
         state,
         action.payload.moduleId,
         action.payload.componentName,
@@ -476,21 +471,6 @@ const deleteComponent = (state, action) => {
     module => module.id === action.payload.moduleId
   );
   module.components = action.payload.newComponents;
-  return {
-    ...state,
-    maps
-  };
-};
-
-const deleteMethod = (state, moduleId, componentName, newComponent) => {
-  const maps = Array.from(state.maps);
-  const map = maps.find(map => map.id === state.currentMap);
-  const module = map.modules.find(module => module.id === moduleId);
-  const targetComponentIndex = module.components.findIndex(
-    component => component.title === componentName
-  );
-  module.components[targetComponentIndex] = newComponent;
-
   return {
     ...state,
     maps
@@ -542,5 +522,20 @@ const renameModule = (state, action) => {
     maps
   }
 };
+
+const renameProperty = (state, action) => {
+  const maps = Array.from(state.maps);
+  const map = maps.find(map => map.id === state.currentMap);
+  const module = map.modules.find(module => module.id === action.payload.moduleId);
+  const targetComponentIndex = module.components.findIndex(
+    component => component.title === action.payload.componentName
+  );
+  module.components[targetComponentIndex] = action.payload.newComponent;
+
+  return {
+    ...state,
+    maps
+  }
+}
 
 export default reducer;

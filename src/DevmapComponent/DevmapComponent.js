@@ -3,7 +3,7 @@ import DevmapProperty from "../DevmapProperty/DevmapProperty";
 import DynamicField from "../DynamicField/DynamicField";
 import "./DevmapComponent.css";
 
-import { renameComponent, deleteMethod, deleteProperty } from '../actions';
+import { renameComponent, deleteProperty, renameProperty } from '../actions';
 
 import { connect } from 'react-redux';
 
@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
   currentMap: state.currentMap,
   maps: state.maps
 });
-export default connect (mapStateToProps, { renameComponent, deleteMethod, deleteProperty }) (class DevmapComponent extends Component {
+export default connect (mapStateToProps, { renameComponent, deleteProperty, renameProperty }) (class DevmapComponent extends Component {
   properties = [];
   methods = [];
 
@@ -43,6 +43,16 @@ export default connect (mapStateToProps, { renameComponent, deleteMethod, delete
     // property type/return: ?
   };
 
+  renameProperty = (index, newName) => {
+    const properties = [...this.properties];
+    properties[index].name = newName;
+    this.props.renameProperty(this.props.moduleId, this.props.component.title, {
+      title: this.props.component.title,
+      properties,
+      methods: this.methods
+    })
+  }
+
   deleteProperty = index => {
     const properties = [...this.properties];
     properties.splice(index, 1);
@@ -53,10 +63,20 @@ export default connect (mapStateToProps, { renameComponent, deleteMethod, delete
     });
   };
 
+  renameMethod = (index, newName) => {
+    const methods = [...this.methods];
+    methods[index].name = newName;
+    this.props.renameProperty(this.props.moduleId, this.props.component.title, {
+      title: this.props.component.title,
+      properties: this.properties,
+      methods
+    })
+  }
+
   deleteMethod = index => {
     const methods = [...this.methods];
     methods.splice(index, 1);
-    this.props.deleteMethod(this.props.moduleId, this.props.component.title, {
+    this.props.deleteProperty(this.props.moduleId, this.props.component.title, {
       title: this.props.component.title,
       properties: this.properties,
       methods
@@ -75,6 +95,7 @@ export default connect (mapStateToProps, { renameComponent, deleteMethod, delete
             index={index}
             name={prop.name}
             type={prop.type}
+            rename={this.renameProperty}
             deleteProperty={() => this.deleteProperty(index)}
             key={prop.name}
           />
@@ -90,8 +111,10 @@ export default connect (mapStateToProps, { renameComponent, deleteMethod, delete
         this.methods.map((method, index) => (
           <DevmapProperty
             method
+            index={index}
             name={method.name}
             returns={method.returns}
+            rename={this.renameMethod}
             key={method.name}
             deleteMethod={() => this.deleteMethod(index)}
           />

@@ -26,6 +26,7 @@
   font-weight: bold;
   align-self: center;
   margin-right: 9px;
+  width: 7rem;
 }
 
 .property .returns {
@@ -36,7 +37,7 @@
   font-weight: bold;
   align-self: center;
   margin-right: 9px;
-  width: 100%;
+  width: 7rem;
 }
 
 .property .delete {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './DevmapProperty.css';
 
 import DynamicField from '../DynamicField/DynamicField';
@@ -11,7 +11,7 @@ const DevmapProperty = props => {
                         : <span className='type'>{props.type}</span>;
 
   const updateName = newName => {
-    props.rename(props.name, newName);
+    props.rename(props.index, newName);
   }
 
   const validateName = () => {
@@ -22,9 +22,8 @@ const DevmapProperty = props => {
     <div className='property'>
       <DynamicField
             nospace
-            text
             updateValue={updateName}
-            placeholder="TITLE"
+            placeholder="Name"
             value={props.name}
             className="mini-field-text"
             validate={validateName}

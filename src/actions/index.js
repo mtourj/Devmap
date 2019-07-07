@@ -8,8 +8,6 @@ export const CREATE_COMPONENT = 'CREATE_COMPONENT';
 export const RENAME_COMPONENT = 'RENAME_COMPONENT';
 export const DELETE_COMPONENT = 'DELETE_COMPONENT';
 export const CREATE_METHOD = 'CREATE_METHOD';
-export const RENAME_METHOD = 'RENAME_METHOD';
-export const DELETE_METHOD = 'DELETE_METHOD';
 export const CREATE_PROPERTY = 'CREATE_PROPERTY';
 export const RENAME_PROPERTY = 'RENAME_PROPERTY';
 export const DELETE_PROPERTY = 'DELETE_PROPERTY';
@@ -97,17 +95,6 @@ export const deleteComponent = (moduleId, newComponents) => dispatch => {
   )
 }
 
-export const deleteMethod = (moduleId, componentName, newComponent) => dispatch => {
-  dispatch ({
-    type: DELETE_METHOD,
-    payload: {
-      moduleId,
-      componentName,
-      newComponent
-    }
-  })
-}
-
 export const deleteProperty = (moduleId, componentName, newComponent) => dispatch => {
   console.log('action created');
   dispatch ({
@@ -127,4 +114,17 @@ export const setCurrentMap = map => dispatch => {
       payload: map
     }
   );
+}
+
+export const renameProperty = (moduleId, componentName, newComponent) => dispatch => {
+  dispatch(
+    {
+      type: RENAME_PROPERTY,
+      payload: {
+        moduleId,
+        componentName,
+        newComponent
+      }
+    }
+  )
 }
