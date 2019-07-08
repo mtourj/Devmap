@@ -23,7 +23,7 @@ export default connect (mapStateToProps, { renameComponent, deleteProperty, rena
     const components = [];
     const map = this.props.maps.find(map => map.id === this.props.currentMap);
     map.modules.forEach(module => components.push(...module.components));
-    return components.every(component => !(component.title === title && component.title !== this.props.component.title ))
+    return components.every(component => component.title === title ? true : component.title !== this.props.component.title )
   }
 
   deleteComponent = event => {
@@ -42,6 +42,26 @@ export default connect (mapStateToProps, { renameComponent, deleteProperty, rena
     // title: ?
     // property type/return: ?
   };
+
+  setPropertyType = (index, newType) => {
+    const properties = [...this.properties];
+    properties[index].type = newType;
+    this.props.renameProperty(this.props.moduleId, this.props.component.title, {
+      title: this.props.component.title,
+      properties,
+      methods: this.methods
+    })
+  }
+
+  setMethodType = (index, newType) => {
+    const methods = [...this.methods];
+    methods[index].type = newType;
+    this.props.renameProperty(this.props.moduleId, this.props.component.title, {
+      title: this.props.component.title,
+      properties: this.properties,
+      methods: methods
+    })
+  }
 
   renameProperty = (index, newName) => {
     const properties = [...this.properties];
@@ -96,6 +116,7 @@ export default connect (mapStateToProps, { renameComponent, deleteProperty, rena
             name={prop.name}
             type={prop.type}
             rename={this.renameProperty}
+            setType={this.setPropertyType}
             deleteProperty={() => this.deleteProperty(index)}
             key={prop.name}
           />
@@ -113,8 +134,9 @@ export default connect (mapStateToProps, { renameComponent, deleteProperty, rena
             method
             index={index}
             name={method.name}
-            returns={method.returns}
+            type={method.type}
             rename={this.renameMethod}
+            setType={this.setMethodType}
             key={method.name}
             deleteMethod={() => this.deleteMethod(index)}
           />
@@ -128,7 +150,6 @@ export default connect (mapStateToProps, { renameComponent, deleteProperty, rena
         <div className="title">
           <DynamicField
             nospace
-            text
             updateValue={this.updateTitle}
             placeholder="TITLE"
             value={this.props.component.title}

@@ -10,6 +10,7 @@ export const DELETE_COMPONENT = 'DELETE_COMPONENT';
 export const CREATE_METHOD = 'CREATE_METHOD';
 export const CREATE_PROPERTY = 'CREATE_PROPERTY';
 export const RENAME_PROPERTY = 'RENAME_PROPERTY';
+export const SET_PROPERTY_TYPE = 'SET_PROPERTY_TYPE';
 export const DELETE_PROPERTY = 'DELETE_PROPERTY';
 export const LOGIN = 'LOGIN';
 export const SET_CURRENT_MAP = 'SET_CURRENT_MAP';
@@ -127,4 +128,15 @@ export const renameProperty = (moduleId, componentName, newComponent) => dispatc
       }
     }
   )
+}
+
+export const setPropertyType = (moduleId, componentName, newComponent) => dispatch => {
+  dispatch ({
+    type: SET_PROPERTY_TYPE,
+    payload: {
+      moduleId,
+      componentName,
+      newComponent
+    }
+  })
 }

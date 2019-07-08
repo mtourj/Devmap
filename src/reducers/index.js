@@ -19,12 +19,12 @@ import * as actions from "../actions";
 //               properties: [
 //                 { name: "property1", type: "string" },
 //                 { name: "property2", type: "int" },
-//                 { name: "property3", type: "{}" }
+//                 { name: "property3", type: "object" }
 //               ],
 //               methods: [
-//                 { name: "method1", returns: "int" },
-//                 { name: "method2", returns: "string" },
-//                 { name: "method3", returns: "[]" }
+//                 { name: "method1", type: "int" },
+//                 { name: "method2", type: "string" },
+//                 { name: "method3", type: "array" }
 //               ]
 //             },
 //             {
@@ -32,12 +32,12 @@ import * as actions from "../actions";
 //               properties: [
 //                 { name: "property1", type: "string" },
 //                 { name: "property2", type: "int" },
-//                 { name: "property3", type: "{}" }
+//                 { name: "property3", type: "object" }
 //               ],
 //               methods: [
-//                 { name: "method1", returns: "int" },
-//                 { name: "method2", returns: "string" },
-//                 { name: "method3", returns: "[]" }
+//                 { name: "method1", type: "int" },
+//                 { name: "method2", type: "string" },
+//                 { name: "method3", type: "array" }
 //               ]
 //             }
 //           ]
@@ -50,12 +50,12 @@ import * as actions from "../actions";
 //               properties: [
 //                 { name: "property1", type: "string" },
 //                 { name: "property2", type: "int" },
-//                 { name: "property3", type: "{}" }
+//                 { name: "property3", type: "object" }
 //               ],
 //               methods: [
-//                 { name: "method1", returns: "int" },
-//                 { name: "method2", returns: "string" },
-//                 { name: "method3", returns: "[]" }
+//                 { name: "method1", type: "int" },
+//                 { name: "method2", type: "string" },
+//                 { name: "method3", type: "array" }
 //               ]
 //             },
 //             {
@@ -63,12 +63,12 @@ import * as actions from "../actions";
 //               properties: [
 //                 { name: "property1", type: "string" },
 //                 { name: "property2", type: "int" },
-//                 { name: "property3", type: "{}" }
+//                 { name: "property3", type: "object" }
 //               ],
 //               methods: [
-//                 { name: "method1", returns: "int" },
-//                 { name: "method2", returns: "string" },
-//                 { name: "method3", returns: "[]" }
+//                 { name: "method1", type: "int" },
+//                 { name: "method2", type: "string" },
+//                 { name: "method3", type: "array" }
 //               ]
 //             }
 //           ]
@@ -81,12 +81,12 @@ import * as actions from "../actions";
 //               properties: [
 //                 { name: "property1", type: "string" },
 //                 { name: "property2", type: "int" },
-//                 { name: "property3", type: "{}" }
+//                 { name: "property3", type: "object" }
 //               ],
 //               methods: [
-//                 { name: "method1", returns: "int" },
-//                 { name: "method2", returns: "string" },
-//                 { name: "method3", returns: "[]" }
+//                 { name: "method1", type: "int" },
+//                 { name: "method2", type: "string" },
+//                 { name: "method3", type: "array" }
 //               ]
 //             },
 //             {
@@ -94,12 +94,12 @@ import * as actions from "../actions";
 //               properties: [
 //                 { name: "property1", type: "string" },
 //                 { name: "property2", type: "int" },
-//                 { name: "property3", type: "{}" }
+//                 { name: "property3", type: "object" }
 //               ],
 //               methods: [
-//                 { name: "method1", returns: "int" },
-//                 { name: "method2", returns: "string" },
-//                 { name: "method3", returns: "[]" }
+//                 { name: "method1", type: "int" },
+//                 { name: "method2", type: "string" },
+//                 { name: "method3", type: "array" }
 //               ]
 //             }
 //           ]
@@ -119,12 +119,12 @@ import * as actions from "../actions";
 //               properties: [
 //                 { name: "property1", type: "string" },
 //                 { name: "property2", type: "int" },
-//                 { name: "property3", type: "{}" }
+//                 { name: "property3", type: "object" }
 //               ],
 //               methods: [
-//                 { name: "method1", returns: "int" },
-//                 { name: "method2", returns: "string" },
-//                 { name: "method3", returns: "[]" }
+//                 { name: "method1", type: "int" },
+//                 { name: "method2", type: "string" },
+//                 { name: "method3", type: "array" }
 //               ]
 //             },
 //             {
@@ -132,12 +132,12 @@ import * as actions from "../actions";
 //               properties: [
 //                 { name: "property1", type: "string" },
 //                 { name: "property2", type: "int" },
-//                 { name: "property3", type: "{}" }
+//                 { name: "property3", type: "object" }
 //               ],
 //               methods: [
-//                 { name: "method1", returns: "int" },
-//                 { name: "method2", returns: "string" },
-//                 { name: "method3", returns: "[]" }
+//                 { name: "method1", type: "int" },
+//                 { name: "method2", type: "string" },
+//                 { name: "method3", type: "array" }
 //               ]
 //             }
 //           ]
@@ -150,12 +150,12 @@ import * as actions from "../actions";
 //               properties: [
 //                 { name: "property1", type: "string" },
 //                 { name: "property2", type: "int" },
-//                 { name: "property3", type: "{}" }
+//                 { name: "property3", type: "object" }
 //               ],
 //               methods: [
-//                 { name: "method1", returns: "int" },
-//                 { name: "method2", returns: "string" },
-//                 { name: "method3", returns: "[]" }
+//                 { name: "method1", type: "int" },
+//                 { name: "method2", type: "string" },
+//                 { name: "method3", type: "array" }
 //               ]
 //             },
 //             {
@@ -163,12 +163,12 @@ import * as actions from "../actions";
 //               properties: [
 //                 { name: "property1", type: "string" },
 //                 { name: "property2", type: "int" },
-//                 { name: "property3", type: "{}" }
+//                 { name: "property3", type: "object" }
 //               ],
 //               methods: [
-//                 { name: "method1", returns: "int" },
-//                 { name: "method2", returns: "string" },
-//                 { name: "method3", returns: "[]" }
+//                 { name: "method1", type: "int" },
+//                 { name: "method2", type: "string" },
+//                 { name: "method3", type: "array" }
 //               ]
 //             }
 //           ]
@@ -181,12 +181,12 @@ import * as actions from "../actions";
 //               properties: [
 //                 { name: "property1", type: "string" },
 //                 { name: "property2", type: "int" },
-//                 { name: "property3", type: "{}" }
+//                 { name: "property3", type: "object" }
 //               ],
 //               methods: [
-//                 { name: "method1", returns: "int" },
-//                 { name: "method2", returns: "string" },
-//                 { name: "method3", returns: "[]" }
+//                 { name: "method1", type: "int" },
+//                 { name: "method2", type: "string" },
+//                 { name: "method3", type: "array" }
 //               ]
 //             },
 //             {
@@ -194,12 +194,12 @@ import * as actions from "../actions";
 //               properties: [
 //                 { name: "property1", type: "string" },
 //                 { name: "property2", type: "int" },
-//                 { name: "property3", type: "{}" }
+//                 { name: "property3", type: "object" }
 //               ],
 //               methods: [
-//                 { name: "method1", returns: "int" },
-//                 { name: "method2", returns: "string" },
-//                 { name: "method3", returns: "[]" }
+//                 { name: "method1", type: "int" },
+//                 { name: "method2", type: "string" },
+//                 { name: "method3", type: "array" }
 //               ]
 //             }
 //           ]
@@ -229,12 +229,12 @@ const initialState = {
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
-                { name: "property3", type: "{}" }
+                { name: "property3", type: "object" }
               ],
               methods: [
-                { name: "method1", returns: "int" },
-                { name: "method2", returns: "string" },
-                { name: "method3", returns: "[]" }
+                { name: "method1", type: "int" },
+                { name: "method2", type: "string" },
+                { name: "method3", type: "array" }
               ]
             },
             {
@@ -242,12 +242,12 @@ const initialState = {
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
-                { name: "property3", type: "{}" }
+                { name: "property3", type: "object" }
               ],
               methods: [
-                { name: "method1", returns: "int" },
-                { name: "method2", returns: "string" },
-                { name: "method3", returns: "[]" }
+                { name: "method1", type: "int" },
+                { name: "method2", type: "string" },
+                { name: "method3", type: "array" }
               ]
             }
           ]
@@ -261,12 +261,12 @@ const initialState = {
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
-                { name: "property3", type: "{}" }
+                { name: "property3", type: "object" }
               ],
               methods: [
-                { name: "method1", returns: "int" },
-                { name: "method2", returns: "string" },
-                { name: "method3", returns: "[]" }
+                { name: "method1", type: "int" },
+                { name: "method2", type: "string" },
+                { name: "method3", type: "array" }
               ]
             },
             {
@@ -274,12 +274,12 @@ const initialState = {
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
-                { name: "property3", type: "{}" }
+                { name: "property3", type: "object" }
               ],
               methods: [
-                { name: "method1", returns: "int" },
-                { name: "method2", returns: "string" },
-                { name: "method3", returns: "[]" }
+                { name: "method1", type: "int" },
+                { name: "method2", type: "string" },
+                { name: "method3", type: "array" }
               ]
             }
           ]
@@ -293,12 +293,12 @@ const initialState = {
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
-                { name: "property3", type: "{}" }
+                { name: "property3", type: "object" }
               ],
               methods: [
-                { name: "method1", returns: "int" },
-                { name: "method2", returns: "string" },
-                { name: "method3", returns: "[]" }
+                { name: "method1", type: "int" },
+                { name: "method2", type: "string" },
+                { name: "method3", type: "array" }
               ]
             },
             {
@@ -306,12 +306,12 @@ const initialState = {
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
-                { name: "property3", type: "{}" }
+                { name: "property3", type: "object" }
               ],
               methods: [
-                { name: "method1", returns: "int" },
-                { name: "method2", returns: "string" },
-                { name: "method3", returns: "[]" }
+                { name: "method1", type: "int" },
+                { name: "method2", type: "string" },
+                { name: "method3", type: "array" }
               ]
             }
           ]
@@ -332,12 +332,12 @@ const initialState = {
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
-                { name: "property3", type: "{}" }
+                { name: "property3", type: "object" }
               ],
               methods: [
-                { name: "method1", returns: "int" },
-                { name: "method2", returns: "string" },
-                { name: "method3", returns: "[]" }
+                { name: "method1", type: "int" },
+                { name: "method2", type: "string" },
+                { name: "method3", type: "array" }
               ]
             },
             {
@@ -345,12 +345,12 @@ const initialState = {
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
-                { name: "property3", type: "{}" }
+                { name: "property3", type: "object" }
               ],
               methods: [
-                { name: "method1", returns: "int" },
-                { name: "method2", returns: "string" },
-                { name: "method3", returns: "[]" }
+                { name: "method1", type: "int" },
+                { name: "method2", type: "string" },
+                { name: "method3", type: "array" }
               ]
             }
           ]
@@ -364,12 +364,12 @@ const initialState = {
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
-                { name: "property3", type: "{}" }
+                { name: "property3", type: "object" }
               ],
               methods: [
-                { name: "method1", returns: "int" },
-                { name: "method2", returns: "string" },
-                { name: "method3", returns: "[]" }
+                { name: "method1", type: "int" },
+                { name: "method2", type: "string" },
+                { name: "method3", type: "array" }
               ]
             },
             {
@@ -377,12 +377,12 @@ const initialState = {
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
-                { name: "property3", type: "{}" }
+                { name: "property3", type: "object" }
               ],
               methods: [
-                { name: "method1", returns: "int" },
-                { name: "method2", returns: "string" },
-                { name: "method3", returns: "[]" }
+                { name: "method1", type: "int" },
+                { name: "method2", type: "string" },
+                { name: "method3", type: "array" }
               ]
             }
           ]
@@ -396,12 +396,12 @@ const initialState = {
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
-                { name: "property3", type: "{}" }
+                { name: "property3", type: "object" }
               ],
               methods: [
-                { name: "method1", returns: "int" },
-                { name: "method2", returns: "string" },
-                { name: "method3", returns: "[]" }
+                { name: "method1", type: "int" },
+                { name: "method2", type: "string" },
+                { name: "method3", type: "array" }
               ]
             },
             {
@@ -409,12 +409,12 @@ const initialState = {
               properties: [
                 { name: "property1", type: "string" },
                 { name: "property2", type: "int" },
-                { name: "property3", type: "{}" }
+                { name: "property3", type: "object" }
               ],
               methods: [
-                { name: "method1", returns: "int" },
-                { name: "method2", returns: "string" },
-                { name: "method3", returns: "[]" }
+                { name: "method1", type: "int" },
+                { name: "method2", type: "string" },
+                { name: "method3", type: "array" }
               ]
             }
           ]
@@ -439,15 +439,15 @@ const reducer = (state = initialState, action) => {
       return renameComponent(state, action);
     case actions.DELETE_COMPONENT:
       return deleteComponent(state, action);
+    case actions.SET_PROPERTY_TYPE:
+      // This is done by updating the entire component
+      return updateComponent(state, action);
     case actions.RENAME_PROPERTY:
-      return renameProperty(state, action);
+      // This is done by updating the entire component
+      return updateComponent(state, action);
     case actions.DELETE_PROPERTY:
-      return deleteProperty(
-        state,
-        action.payload.moduleId,
-        action.payload.componentName,
-        action.payload.newComponent
-      );
+      // This is done by updating the entire component
+      return updateComponent(state, action);
     case actions.SET_CURRENT_MAP:
       return {
         ...state,
@@ -471,21 +471,6 @@ const deleteComponent = (state, action) => {
     module => module.id === action.payload.moduleId
   );
   module.components = action.payload.newComponents;
-  return {
-    ...state,
-    maps
-  };
-};
-
-const deleteProperty = (state, moduleId, componentName, newComponent) => {
-  const maps = Array.from(state.maps);
-  const map = maps.find(map => map.id === state.currentMap);
-  const module = map.modules.find(module => module.id === moduleId);
-  const targetComponentIndex = module.components.findIndex(
-    component => component.title === componentName
-  );
-  module.components[targetComponentIndex] = newComponent;
-
   return {
     ...state,
     maps
@@ -520,13 +505,15 @@ const renameModule = (state, action) => {
   return {
     ...state,
     maps
-  }
+  };
 };
 
-const renameProperty = (state, action) => {
+const updateComponent = (state, action) => {
   const maps = Array.from(state.maps);
   const map = maps.find(map => map.id === state.currentMap);
-  const module = map.modules.find(module => module.id === action.payload.moduleId);
+  const module = map.modules.find(
+    module => module.id === action.payload.moduleId
+  );
   const targetComponentIndex = module.components.findIndex(
     component => component.title === action.payload.componentName
   );
@@ -535,7 +522,7 @@ const renameProperty = (state, action) => {
   return {
     ...state,
     maps
-  }
-}
+  };
+};
 
 export default reducer;

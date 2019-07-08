@@ -2,6 +2,7 @@
   display: flex;
   width: 90%;
   justify-content: space-between;
+  align-items: center;
   margin: 0;
   padding: 0 1rem;
 
@@ -20,24 +21,16 @@
 
 .property .type {
   display: flex;
-  justify-content: flex-end;
   font-style: italic;
   color: lemonchiffon;
   font-weight: bold;
-  align-self: center;
-  margin-right: 9px;
-  width: 7rem;
+  font-size: 18px;
+  margin: 0 9px;
 }
 
 .property .returns {
-  display: flex;
-  justify-content: flex-end;
-  font-style: italic;
-  color: lemonchiffon;
-  font-weight: bold;
-  align-self: center;
-  margin-right: 9px;
-  width: 7rem;
+  position: absolute;
+  transform: translateX(150px) translateY(-3px);
 }
 
 .property .delete {
