@@ -28,6 +28,19 @@ export default class DynamicField extends Component {
     }
   };
 
+  escape = event => {
+    if(event.keyCode === 27) {
+      this.toggleEditValue(false);
+    }
+  }
+
+  componentDidMount(){
+    document.addEventListener("keydown", this.escape, false);
+  }
+  componentWillUnmount(){
+    document.removeEventListener("keydown", this.escape, false);
+  }
+
   updateTempValue = async event => {
     if (this.state.invalid) this.setState({ invalid: "" });
     await this.setState({ tempValue: event.target.value });
