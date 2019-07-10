@@ -23,6 +23,13 @@ export default connect(mapStateToProps, { setCurrentMap })(class Devmap extends 
     // TODO: DELETE THE MODULE FROM DATA
   };
 
+  addModule = () => {
+    const newModuleIndex = this.props.modules.length + 1;
+
+
+    //this.props.addModule();
+  }
+
   getProps = () => {
     return this.props;
   };
@@ -55,6 +62,9 @@ export default connect(mapStateToProps, { setCurrentMap })(class Devmap extends 
 
     return (<div className="cols">
       <Sidebar maps={this.props.maps} setCurrentMap={this.setCurrentMap} />
+      {
+        this.props.currentMap ? <div onClick={this.addModule} className='add-module-button'>+</div> : null
+      }
       <div className="map">
         {
           this.props.currentMap ? modules : <p className='noselection'>Devmaps will appear here when selected</p>

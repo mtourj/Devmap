@@ -33,3 +33,26 @@
   box-shadow: 0 0 5px 0 black;
   z-index: 1;
 }
+
+.add-module-button {
+  background: rgba(120, 220, 120, 0.75);
+  border-radius: 4px;
+  padding: 4px;
+  position: absolute;
+  z-index: 1;
+  right: 10px;
+  transform: translateY(10px);
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  vertical-align: center;
+  font-weight: bolder;
+  color: white;
+  box-shadow: 0 0 4px 0 black;
+  cursor: pointer;
+  user-select: none;
+}
+
+.add-module-button:hover {
+  background: rgba(120, 220, 120, 1);
+}
